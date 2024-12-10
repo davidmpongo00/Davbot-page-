@@ -5,25 +5,112 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="banner.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:description" content="Created by David mpongo (dav). This project is dedicated to my gf">
+  <link rel="icon" href="icon.png">
+  <title>Ws3-davbot page Bot</title>
+  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"
-  integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js" integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@5/dark.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="font.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.png">
-  <meta property="og:description" content="Bot is successfully running. Check details here">
-  <title>Ws3 Page Bot</title>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
-  <div class="header">
-    <img id="main" style="border: solid 2px #ff00ff; border-radius: 100px;" width="50" height="50"/>
-    <div style="margin-left: 5px">
-      <h4 style="font-weight: 900">Ws3</h4>
-      <p style="margin-left: 0.5px; font-size: 10px">Page Bot</p>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <canvas id="c" style="animation: slideIn 500ms ease; left:0; right:0; height:100vh; position: fixed;">Your browser does not support Canvas!</canvas>
+  <nav class="dropdown header">
+    <div style="width:100vw">
+      <img id="main" style="border: solid 2px purple; border-radius: 100px;" width="50" height="50" />
     </div>
+    <button class="button0" style="outline: none; margin: 0;" data-bs-toggle="dropdown" aria-expanded="false">
+      <p style="font-size:15px;">⚙️ MENU</p>
+    </button>
+    <ul class="dropdown-menu">
+      <li><h1 class="dropdown-item" style="font-size: 20px; font-weight: 700; color: white; animation: none;">MENU</h1></li>
+      <li><a class="dropdown-item" onclick="openNavigation('navLeft'); listOfAi();">ACTIVE SESSIONS</a></li>
+      <li><a class="dropdown-item" onclick="openNavigation('navLeft2')">DEVELOPER INFO</a></li>
+      <li><a class="dropdown-item" onclick="openNavigation('navLeft3')">ADMIN CONFIG</a></li>
+    </ul>
+  </nav>
+  <div id="navLeft" class="sidenav">
+    <div onclick="closeNavigation('navLeft')">
+    <p>&times; CLOSE</p>
+    </div>
+    <div class="container">
+    <h1>Active Sessions</h1>
+    <hr />
+    <div onclick="listOfAi()">
+      <p>REFRESH</p>
+    </div>
+    <div class="row" id="user_online"></div>
+  </div>
+  </div>
+  <div id="navLeft2" class="sidenav">
+    <div onclick="closeNavigation('navLeft2')">
+      <p>&times; CLOSE</p>
+    </div>
+    <div class="container">
+    <img style="padding: 10px" src="47203863_1134375583403365_2640803535783985152_n.png" />
+    <h1>Developer Info</h1>
+    <hr />
+    <ul id="devInfo" style="margin-top: 5px; font-size: 10px; margin-left: 10px">
+    </ul>
+    <div style="animation: slideLeft 1s ease;">
+      <p style="margin: 0; margin-left: 5px; margin-bottom: 3px; font-size: 7px; margin-top: 10px; text-align: left; padding: 0; margin-bottom: 5px; letter-spacing: 2px;">ADMINS</p>
+      <div id="pageAdmins"></div>
+    </div>
+  </div>
+  <div class="container">
+    <button id="playMusic" class="button1">Play Music</button>
+  </div>
+  </div>
+  <div id="navLeft3" class="sidenav">
+    <div onclick="closeNavigation('navLeft3')">
+      <p>&times; CLOSE</p>
+    </div>
+    <div class="container" style="padding:20px animation: slideIn 1s ease;">
+    <img src="431912635_2451397945044979_7367073660814100910_n.png"/>
+    <h1 align="center" style="padding:20px">Ws3 AutoPage Bot — Admins Config</h1>
+    <div class="bgn-isa" style="padding:20px" id="container">
+      <input type="password" id="u2" class="form-item" style="margin-bottom: 10px" placeholder="Access Key">
+      <button id="salp1" class="button1" onclick="restart(false)">RESTART</button>
+      <button id="salp2" class="button1" onclick="restart(true)">RESTART ALL</button>
+    </div>
+    </div>
+    
+  </div>
+  <div class="container" style="padding: 20px; word-break: normal;">
+    <p>This website is strictly not for sale ‼️</p>
+    <p>If someone selling this website kindly report to the owner</p>
+    <p>-Neth</p>
+  </div>
+  <div class="container">
+    <h1>Getting Started</h1>
+    <hr />
+    <p>How to use? click me below 👇</p>
+    <button class="button1" onclick="window.location.href='https://www.facebook.com/groups/coders.dev/permalink/462376589765255/'">Video Tutorial</button>
+    <br><br>
+    <p>Chat with our official pagebot 👇🤖</p>
+    <button class="button1" onclick="window.location.href='https://www.facebook.com/wyumibot/'">Wyumi PageBot</button>
+  </div>
+  <div class="container">
+    <h1>Add Session</h1>
+    <hr />
+    <p id="serverlength">Servers: Loading...</p>
+    <select class="form-item" onchange="tangina(this)" name="servers" id="servers">
+    </select>
+    <form onsubmit="submitForm(event)" class="form-container">
+      <div class="form-item">
+        <label for="token">Enter your Page Access Token:</label>
+        <input class="form-item" type="text" id="token" name="cookie" placeholder="EAA**************">
+      </div>
+      <button class="button1" type="submit" onclick="submitForm()" id="submit-button">SUBMIT</button>
+    </form>
   </div>
   <div class="container">
     <h1>Browser Info</h1>
@@ -35,27 +122,35 @@
   </div>
   <div class="container">
     <h1>Bot Info</h1>
-    <hr/>
+    <hr />
     <ul id="botInfo" style="margin-top: 5px; font-size: 10px; margin-left: 10px">
     </ul>
   </div>
-  <div class="container">
-    <h1>Developer Info</h1>
-    <hr />
-    <ul id="devInfo" style="margin-top: 5px; font-size: 10px; margin-left: 10px">
-    </ul>
-    <div style="animation: slideLeft 1s ease;">
-    <p style="margin: 0; margin-left: 5px; margin-bottom: 3px; font-size: 7px; margin-top: 10px; text-align: left; padding: 0; margin-bottom: 5px; letter-spacing: 2px;">FB PAGE ADMINS</p>
-    <div id="pageAdmins"></div>
-    </div>
+ <div>
+    <p>Join our group below! 👇</p>
+    <button class="button1" onclick="window.location.href='https://www.facebook.com/groups/coders.dev/'">ChatBot Community</button>
+    <img style="margin-top: 10px;" src="851577_641023055913306_886810416_n.png"/>
+    <br><br><br><br>
   </div>
-  <div>
-  <button id="restartBot" class="button1">Restart Bot</button>
-  <button id="playMusic" class="button1">Play Music</button>
-  </div>
-  <footer>
-    <p style="font-size: 7px">© 2024 — Ws3 Page Bot</p>
+  <footer
+    <p style="font-size: 7px">© 2024 — davbot page Bot | Created by David mpongo</p>
   </footer>
+  <script src="servers.js"></script>
   <script src="script.js"></script>
+  <script type="text/javascript">
+    var a = document.getElementById("c"),
+      c = a.getContext("2d");
+    a.height = window.innerHeight;
+    a.width = window.innerWidth;
+    window.addEventListener("resize", function() { a.height = window.innerHeight;
+      a.width = window.innerWidth });
+    for (var d = "WS3ws378".toLowerCase().split(""), e = a.width / 10, f = [], g = 0; g < e; g++) f[g] = 1;
+    setInterval(function() { c.fillStyle = "rgb(0,0,0,0.1)";
+      c.fillRect(0, 0, a.width, a.height);
+      c.fillStyle = "#0F0";
+      c.font = "500 10px OCR-A";
+      c.textAlign = "center"; for (var b = 0; b < f.length; b++) c.fillText(d[Math.floor(Math.random() * d.length)], 10 * b, 10 * f[b]), 10 * f[b] > a.height && .975 < Math.random() && (f[b] = 0), f[b]++ }, 33);
+  </script>
 </body>
+
 </html>
