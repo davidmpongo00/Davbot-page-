@@ -1,13 +1,13 @@
 {
-  "name": "Ws3PageBot",
+  "name": "Davbot PageBot",
   "version": "1.0.0",
-  "description": "",
+  "description": "bot actif 24h/7",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Neth Aceberos",
+  "author": "David mpongo",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^18.0.6",
